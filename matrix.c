@@ -22,6 +22,7 @@ print the matrix such that it looks like
 the template in the top comment
 */
 void print_matrix(struct matrix *m) {
+  printf("\nRows: %d\tCols: %d\tLastcol: %d\n",m->rows,m->cols,m->lastcol);
   printf("[");
   int i, row = 0;
   while (row < m->rows) {
