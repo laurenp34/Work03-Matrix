@@ -144,9 +144,9 @@ int main() {
   struct matrix * idt;
   struct matrix * mat;
   idt = new_matrix(4,4);
-  print_matrix(idt);
+  //print_matrix(idt);
   ident(idt);
-  print_matrix(idt);
+  //print_matrix(idt);
   idt->m[1][1] = 3;
   idt->m[2][2] = 4;
 
@@ -157,12 +157,43 @@ int main() {
   add_point(mat,1,2,3);
   add_point(mat,10,11,12);
 
-  printf("MULTIPLYING:\n");
+  printf("TESTING MULTIPLYING:\n");
+  printf("\ncase1:\nm1=\n");
   print_matrix(idt);
-  printf("x\n");
+  printf("\nm2=\n");
   print_matrix(mat);
 
   matrix_mult(idt,mat);
-  printf("RESULT:\n");
+  printf("\nm1 * m2 =\n");
   print_matrix(mat);
+
+  printf("\ncase2:\n");
+  free_matrix(mat);
+  ident(idt);
+  mat = new_matrix(4,4);
+  add_point(mat,1,2,3);
+  add_point(mat,4,5,6);
+  printf("m2 =\n");
+  print_matrix(mat);
+  printf("\nm1 =\n");
+  print_matrix(idt);
+  matrix_mult(idt,mat);
+  printf("\nm1 * m2 =\n");
+  print_matrix(mat);
+
+  printf("\ncase3:\n");
+  free_matrix(idt);
+  idt = new_matrix(4,1);
+  add_point(idt,1,2,3);
+  add_point(idt,4,5,6);
+  add_point(idt,7,8,9);
+  add_point(idt,10,11,12);
+  printf("m1 =\n");
+  print_matrix(idt);
+  printf("\nm2 =\n");
+  print_matrix(mat);
+  matrix_mult(idt,mat);
+  printf("\nm1 * m2=\n");
+  print_matrix(mat);
+
 }

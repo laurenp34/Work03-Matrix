@@ -22,7 +22,7 @@ print the matrix such that it looks like
 the template in the top comment
 */
 void print_matrix(struct matrix *m) {
-  printf("\nRows: %d\tCols: %d\tLastcol: %d\n",m->rows,m->cols,m->lastcol);
+  //printf("\nRows: %d\tCols: %d\tLastcol: %d\n",m->rows,m->cols,m->lastcol);
   printf("[");
   int i, row = 0;
   while (row < m->rows) {
@@ -62,20 +62,29 @@ multiply a by b, modifying b to be the product
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
-  if (a->lastcol == b->rows) {
-    printf("multiplying\n");
+  struct matrix *b2 = new_matrix(b->rows,b->cols); //copy of b
+  copy_matrix(b,b2);
+  b2->lastcol = b->lastcol;
+  //print_matrix(b2);
+  if (a->lastcol == b2->rows) {
+    //printf("multiplying\n");
     //go through all numbers row by row in b
-    int row,add_i,sum,col;
-    for(row=0;row<b->rows;row++) {
+    int row,add_i,col;
+    double sum;
+    for(row=0;row<b2->rows;row++) {
     //look at each number in that row
-      for (col=0;col<b->lastcol;col++) {
+      for (col=0;col<b2->lastcol;col++) {
         sum = 0;
         //calculate sum for each index
         for (add_i=0;add_i<a->lastcol;add_i++) {
-          sum += (a->m[row][add_i] * b->m[add_i][col]);
+          //printf("%f\t",sum);
+          sum += (a->m[row][add_i] * b2->m[add_i][col]);
+           //printf("%f\t",sum);
         }
+        //printf("\n");
         //insert sum into b matrix
         b->m[row][col] = sum;
+        //print_matrix(b);
       }
     }
   }
