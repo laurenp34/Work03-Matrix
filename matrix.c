@@ -62,6 +62,23 @@ multiply a by b, modifying b to be the product
 a*b -> b
 */
 void matrix_mult(struct matrix *a, struct matrix *b) {
+  if (a->lastcol == b->rows) {
+    printf("multiplying\n");
+    //go through all numbers row by row in b
+    int row,add_i,sum,col;
+    for(row=0;row<b->rows;row++) {
+    //look at each number in that row
+      for (col=0;col<b->lastcol;col++) {
+        sum = 0;
+        //calculate sum for each index
+        for (add_i=0;add_i<a->lastcol;add_i++) {
+          sum += (a->m[row][add_i] * b->m[add_i][col]);
+        }
+        //insert sum into b matrix
+        b->m[row][col] = sum;
+      }
+    }
+  }
 }
 
 
