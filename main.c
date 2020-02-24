@@ -80,6 +80,66 @@ int main() {
   // save_ppm(s, "binary.ppm");
   // free_matrix( edges );
 
+  //DRAW CAT
+  int left_x = 20;
+  int bot_y = 0;
+
+  while (bot_y+100 < YRES) {
+
+    //body
+    //brown
+    c.red = 139;
+    c.green = 69;
+    c.blue = 19;
+    free_matrix(edges);
+    edges = new_matrix(4, 4);
+    add_edge(edges, left_x,bot_y,1,left_x+300,bot_y,1);
+    add_edge(edges, left_x,bot_y,1,left_x,bot_y+100,1);
+    add_edge(edges, left_x+120,bot_y,1,left_x+120,bot_y+100,1);
+    add_edge(edges, left_x+120,bot_y+60,1,left_x+300,bot_y+60,1);
+    add_edge(edges, left_x+300,bot_y,1,left_x+300,bot_y+60,1);
+    //ears
+    add_edge(edges, left_x,bot_y+100,1,left_x+20,bot_y+80,1);
+    add_edge(edges, left_x+120,bot_y+100,1,left_x+100,bot_y+80,1);
+    //top of head
+    add_edge(edges, left_x+20,bot_y+80,1,left_x+100,bot_y+80,1);
+
+    draw_lines(edges,s,c);
+    free_matrix(edges);
+
+    //whiskers
+    c.red = 255;
+    c.green = 255;
+    c.blue = 255;
+    edges = new_matrix(4, 4);
+    add_edge(edges, left_x+85,bot_y+40,1,left_x+135,bot_y+40,1);
+    add_edge(edges, left_x+90,bot_y+50,1,left_x+130,bot_y+60,1);
+    add_edge(edges, left_x+90,bot_y+30,1,left_x+130,bot_y+20,1);
+    add_edge(edges, left_x-15,bot_y+40,1,left_x+35,bot_y+40,1);
+    add_edge(edges, left_x-10,bot_y+60,1,left_x+30,bot_y+50,1);
+    add_edge(edges, left_x-10,bot_y+20,1,left_x+30,bot_y+30,1);
+
+    draw_lines(edges,s,c);
+    free_matrix(edges);
+
+    //eyes
+    //sky blue
+    c.red = 135;
+    c.green = 206;
+    c.blue = 250;
+    edges = new_matrix(4, 4);
+    add_edge(edges, left_x+25,bot_y+65,1,left_x+35,bot_y+65,1);
+    add_edge(edges, left_x+85,bot_y+65,1,left_x+95,bot_y+65,1);
+
+    draw_lines(edges,s,c);
+
+    bot_y+= 110;
+  }
+  display(s);
+  save_extension(s, "lines.png");
+  save_ppm(s, "binary.ppm");
+  free_matrix( edges );
+
   //MATRIX OPERATIONS
   struct matrix * idt;
   struct matrix * mat;
